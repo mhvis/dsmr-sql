@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    environment:
+      DSMR_DB_NAME: dsmr
+      DSMR_DB_USER: dsmr
+      DSMR_DB_PASSWORD: dsmr
+      DSMR_DB_HOST: db
+      DSMR_DEVICE: /dev/ttyUSB0
+      # Choices: V2_2, V4, V5
+      DSMR_SERIAL_SETTINGS: V5
+      # Choices: V2_2, V3, V4, V5
+      DSMR_TELEGRAM_SPECIFICATION: V5
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: dsmr
+      POSTGRES_PASSWORD: dsmr
+      POSTGRES_DB: dsmr
+    volumes:
+      - db:/var/lib/postgresql/data
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - 44757:3000
+    volumes:
+      - grafana:/var/lib/grafana
+
+volumes:
+  db:
+  grafana:
