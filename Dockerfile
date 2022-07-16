@@ -7,5 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT ["python", "manage.py"]
-CMD ["dsmr"]
+CMD ["python", "manage.py", "dsmr"]

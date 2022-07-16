@@ -15,6 +15,7 @@ services:
       DSMR_TELEGRAM_SPECIFICATION: V5
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
+    restart: unless-stopped
   db:
     image: postgres:14
     environment:
@@ -23,6 +24,7 @@ services:
       POSTGRES_DB: dsmr
     volumes:
       - db:/var/lib/postgresql/data
+    restart: unless-stopped
   grafana:
     image: grafana/grafana-oss
     ports:
