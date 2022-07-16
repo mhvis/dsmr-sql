@@ -19,10 +19,15 @@ class Telegram(models.Model):
     gas_meter_reading = models.DecimalField(max_digits=10, decimal_places=3)
 
     @classmethod
-    def from_object(cls, telegram):
-        """Create instance from Telegram objects from dsmr_parser library."""
+    def from_object(cls, telegram, time=None):
+        """Create instance from Telegram objects from dsmr_parser library.
+
+        Args:
+            telegram: A dsmr_parser Telegram object.
+            time: If given, will be used as time instead of the telegram timestamp.
+        """
         return cls(
-            time=telegram.P1_MESSAGE_TIMESTAMP.value,
+            time=time or telegram.P1_MESSAGE_TIMESTAMP.value,
             raw=telegram._telegram_data,
             electricity_used_tariff_1=telegram.ELECTRICITY_USED_TARIFF_1.value,
             electricity_used_tariff_2=telegram.ELECTRICITY_USED_TARIFF_2.value,

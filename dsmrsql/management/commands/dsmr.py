@@ -2,6 +2,7 @@ import logging
 
 from django.conf import settings
 from django.core.management import BaseCommand
+from django.utils import timezone
 from dsmr_parser.clients import SerialReader
 
 from dsmrsql.models import Telegram
@@ -20,4 +21,4 @@ class Command(BaseCommand):
         )
 
         for telegram in serial_reader.read_as_object():
-            Telegram.from_object(telegram).save()
+            Telegram.from_object(telegram, time=timezone.now()).save()
