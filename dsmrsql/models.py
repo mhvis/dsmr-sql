@@ -25,5 +25,7 @@ class Telegram(models.Model):
             time=telegram.P1_MESSAGE_TIMESTAMP.value,
             raw=telegram._telegram_data,
             electricity_used_tariff_1=telegram.ELECTRICITY_USED_TARIFF_1.value,
-
+            electricity_used_tariff_2=telegram.ELECTRICITY_USED_TARIFF_2.value,
+            electricity_delivered_tariff_1=telegram.ELECTRICITY_DELIVERED_TARIFF_1.value,
+            electricity_delivered_tariff_2=telegram.ELECTRICITY_DELIVERED_TARIFF_2.value,
         )
