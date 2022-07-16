@@ -15,7 +15,10 @@ services:
       DSMR_TELEGRAM_SPECIFICATION: V5
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
+    depends_on:
+      - db
     restart: unless-stopped
+
   db:
     image: postgres:14
     environment:
@@ -25,12 +28,16 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     restart: unless-stopped
+
   grafana:
     image: grafana/grafana-oss
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
     ports:
       - 44757:3000
     volumes:
       - grafana:/var/lib/grafana
+    restart: unless-stopped
 
 volumes:
   db:
