@@ -1,4 +1,5 @@
-version: '3.9'
+# New Docker Compose format (since 9-2020)
+name: dsmrsql
 
 services:
   app:
@@ -9,7 +10,7 @@ services:
       DSMR_DB_PASSWORD: dsmr
       DSMR_DB_HOST: db
       DSMR_DEVICE: /dev/ttyUSB0
-      # Choices: V2_2, V4, V5
+      # Choices: V2_2, V4, V5 (for V3, use V2_2)
       DSMR_SERIAL_SETTINGS: V5
       # Choices: V2_2, V3, V4, V5
       DSMR_TELEGRAM_SPECIFICATION: V5
